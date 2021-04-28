@@ -8,13 +8,13 @@ Kindly feel free to look around and suggest changes as well.
 
 ## Usage
 
-Firstly you will need `iverilog` or an equivalent tool to verify it's working.
+Firstly, you will need `iverilog` or an equivalent tool to verify the working.
 
 To view waveform, kindly use `gtkwave`.
 
 Steps to view the output:
 
-+ Launch terminal and clone the repository into your local system.
++ Launch terminal and clone the repository into your local machine.
 + `cd` into the directory.
 + Type the following command `iverilog -o uart tb_uart.v uart.v`.
 + Once the above command is executed, run `vvp uart`.
