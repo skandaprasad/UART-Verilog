@@ -37,6 +37,7 @@ Now, the next thing we need to know is the format of the data which is to be tra
 
 ![UART Data frame](./uart3.png)
 
+A data frame always starts with the `start bit`, followed by the byte to be transmitted and then a `stop bit` (`parity bit` is optional). In our implementation, we ignore the `parity bit`. 
 
 ## Working of UART Protocol
 
@@ -52,11 +53,11 @@ The working in a superficial sense is given below:
 + Data gets shifted into the `tx_datareg` which acts as a buffer. 
 + At the next clock cycle, data gets shifted in parallel into `tx_shiftreg` which then gets shifted out serially through the `serial_out`.
 
-+ Data is received serially by the `serial_in` at the `Rx` by the `rx_shiftreg`.
-+ Point to note is that `Rx` works on it's own `sample_clk` which is approximately **8x** the clock frequency of the `Tx`.
-+ Once the data is sampled, it is loaded onto `rx_datareg` which then goes to the host.
++ Data is received serially by the `serial_in` at the `Rx` and then loaded into `rx_shiftreg`.
++ Point to note is that `Rx` works on it's own `sample_clk` which is approximately **8x** the clock frequency of the `Tx`. 
++ Once the data is sampled, it is loaded onto `rx_datareg` which then is sent to the host.
 
-The catch in the working of UART Hardware is that both `Tx` and `Rx` are **state machines**. The state machine (controller) takes input signals from the `host` and also throw output signals for the efficient working and coordination between `Tx` and `Rx`.
+The catch in the working of UART Hardware is that both `Tx` and `Rx` are **state machines**. The state machine (controller) takes input signals from the `host` and also outputs signals for the efficient working and coordination between `Tx` and `Rx`.
 
 ## Ports with meanings
 
